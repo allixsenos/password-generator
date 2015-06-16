@@ -1,0 +1,111 @@
+/*
+***********************************************************
+*
+* Title:		main.css
+* Website:		generator.designeus.net
+* Browser(s): 	All (except IE)
+*
+* Author: 		Davor Tomic for Designeus (www.designeus.hr)
+* Copyright:	Designeus, 2009.
+* Created: 		6.12.2009.
+*
+* This code is not in the public domain and must not be
+* copied or modified without authorisation by the author
+* and copyright holders.
+*
+***********************************************************
+*/
+
+/* -----------
+    CSS RESET
+   ----------- */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {margin:0;padding:0;}
+table {/*border-collapse:collapse*/;border-spacing:0;}
+fieldset,img {border:0;}
+address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:normal;}
+ol,ul, li {list-style:none;}
+caption,th {text-align:left;}
+h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal;}
+q:before,q:after {content:'';}
+abbr,acronym {border:0;}
+* {outline:none;}
+
+/* -------------------------- */
+
+strong { font-weight: bold }
+em { font-style: italic }
+
+* a { position:relative } /* Gets links displaying over a PNG background */
+a { outline:none } /* Gets rid of Firefox's dotted borders */
+a img { border:none } /* Gets rid of IE's blue borders */
+
+
+/* ----- FLOATS & CLEARS ----- */
+.left { float:left; }
+.right { float:right; }
+.clear { clear:both; }
+.centered { text-align:center }
+.alignleft { text-align:left }
+.alignright { text-align:right }
+
+/* ----- SPRITE ----- */
+.sprite { background:url(img/sprite.png) 0 0 no-repeat; }
+
+/* ----- BASIC TYPOGRAPHY ----- */
+body { color:#999; font-family:Arial, “Helvetica Neue”, Helvetica, sans-serif; font-size:14px; }
+a { color:#3586cb; text-decoration:none; }
+a:hover { color:#3586cb; text-decoration:underline; }
+h1 { color:#999; font-size:14px; }
+h2 { background-color:#eee; -moz-border-radius:5px; -webkit-border-radius:5px; color:#888; font-size:16px; font-weight:bold; padding:6px 12px; }
+h3 { color:#777; font-size:25px; font-weight:bold; text-transform:uppercase; }
+
+/* --------
+    LAYOUT
+   -------- */
+#wrapper { margin:0 auto; width:780px; }
+
+/* ----- HEADER ----- */
+#header { margin-top:35px; text-align:center }
+#links { margin-top:6px; }
+#links li { display:inline; font-size:13px; }
+#links li span { margin:0 10px; }
+
+/* ----- CONTAINER ----- */
+#container { margin-top:50px; }
+
+/* GENERATOR */
+#generator { float:left; margin-right:100px; width:300px; }
+#generator a { display:block; float:right; height:16px; margin:-24px 12px 0 0; width:16px; }
+#generator a:hover { background-position:-16px 0 }
+#templates { margin:10px 0 30px 10px }
+#templates li { margin:15px 0 }
+#templates li input { margin-right:6px; }
+input.qntty { border:1px solid #eee; -moz-border-radius:5px; -webkit-border-radius:5px; float:right; font-size:16px; height:16px; margin:-30px 2px 0 0; padding:4px 12px 6px; text-align:center; width:30px; }
+input.button { background-position:0 -20px; border:none; cursor:pointer; height:55px; margin-top:30px; width:300px; }
+input.button:active { background-position:0 -75px; }
+
+/* RESULTS */
+#results { background-color:#eee; -moz-border-radius:10px; -webkit-border-radius:10px; float:left; padding:15px 20px; text-align:center; width:340px; }
+#passwords { margin-top:5px }
+#passwords li { -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; color:#3586cb; font-size:18px; font-weight:bold; list-style:none; margin:0 auto; padding:5px 8px; width:150px; }
+#passwords li.hover { /*text-decoration: underline;*/ background-color:#fff; }
+#passwords li.active { /*color: #f00;*/ background-color:#ffffea; color:#000; text-decoration:none; }
+
+
+/* tooltip styling */
+.tooltip {
+    display:none;
+    background:url(img/black_big.png);
+    height:154px;
+    padding:25px 30px 10px 30px;
+    width:310px;
+    font-size:11px;
+    color:#fff;
+}
+
+.tooltip table { width: 100%; }
+
+#footer { background-color:#fff; bottom:0; clear:left; padding:15px 0; position:absolute; width:100%; }
+a.designeus { background:url(img/designeus-logo.png) no-repeat 0 0; display:block; height:30px; margin:0 auto; width:113px; }
+a.designeus:hover { background-position:0 -30px; }

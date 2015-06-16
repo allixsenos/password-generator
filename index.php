@@ -2,127 +2,98 @@
 
 $counter_file = "./counter.txt";
 
-if (strtolower($_SERVER['SERVER_NAME'])!='generator.designeus.net')
-    header("Location: http://generator.designeus.net/");
-
 if ($_SERVER["QUERY_STRING"]=='gimmesource') {
 	highlight_file('index.php');
 	die();
 }
 
-if ($fp = fopen($counter_file, "r"))
-{
-    $counter = (int) fread($fp, 20);
-    fclose($fp);
-}
-else
-{
+$counter = @file_get_contents($counter_file);
+if (!$counter)
     $counter = 0;
-}
 
 ?>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title> DESIGNEUS .:. Password Generator</title>
-<style>
-body,td,th {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	color: #FFFFFF;
-}
-body {
-	background-color: #4A4A4A;
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-}
-input.unos, textarea, select {
-	border:0px;
-	color:#000;
-	background-color:#AFB7AF;
-}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Pronounceable Password Generator by Designeus Web Studio</title>
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="jquery.tools.min.js"></script>
+    <script type="text/javascript" src="zeroclipboard/ZeroClipboard.js"></script>
+    <script language="JavaScript">
+        var clip = null;
 
-input.unos:focus, textarea:focus, select:focus {
-	color:#000;
-	background-color:#D6DBD6;
-}
+        $(function() {
+            // setup single ZeroClipboard object for all our elements
+            clip = new ZeroClipboard.Client();
+            clip.setHandCursor( true );
+            // assign a common mouseover function for all elements using jQuery
+            $('.copyme').mouseover( function() {
+                // set the clip text to our innerHTML
+                clip.setText( this.innerHTML );
 
-input.gumb {
-	color:#0099FF;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-weight:bold;
-	background-color:#333333;
-	border:1px;
-	border-top:#FFFFFF;
-	border-left:#FFFFFF;
-	border-top:#DDDDDD;
-	border-left:#DDDDDD;
-	cursor:pointer;
- }
+                // reposition the movie over our element
+                // or create it if this is the first time
+                if (clip.div) {
+                    clip.receiveEvent('mouseout', null);
+                    clip.reposition(this);
+                } else {
+                    clip.glue(this);
+                }
 
-input.gumb:focus, input.gumb:hover {
-	color:#FC780D;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-weight:bold;
-	background-color:#333333;
-	border:1px;
-	border-top:#FFFFFF;
-	border-left:#FFFFFF;
-	border-top:#DDDDDD;
-	border-left:#DDDDDD;
-	cursor: pointer;
-	}
-a {
-	color:#0099FF;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-weight:bold;
- }
+                // gotta force these events due to the Flash movie
+                // moving all around.  This insures the CSS effects
+                // are properly updated.
+                clip.receiveEvent('mouseover', null);
+            });
 
-a:focus, a:hover {
-	color:#FC780D;
-	}
-.row1 {
-	background-color:#333;
-	text-align:center;
-	}
+            $(".about_templates").tooltip({
+                position: 'center right',
+                // use "slide" effect
+                effect: 'slide'
+            // add dynamic plugin
+            });
 
-.row2 {
-	background-color:#555;
-	text-align:center;
-	}
-.naslov {
-	font-size: 18px;
-	font-weight: bold;
-	color: #F2F2F2;
-	font-variant: small-caps;
-}
-.malinaslov {
-	font-size: 14px;
-	color: #F0F0F0;
-	font-weight: bold;
-	font-variant: small-caps;
-}
-</style>
+        });
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-57622-11']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+        })();
+    </script>
 </head>
-
 <body>
-<p><span class="naslov">Password Generator by <a href="http://www.designeus.net/">Designeus</a></span><br />
-<span class="malinaslov">Generated <?=$counter?> passwords since 2004-12-19.</span></p>
+
+<div id="wrapper">
+    <div id="header">
+        <img src="img/logo.png" alt="Password Generator" />
+        <h1>generated <?=number_format($counter);?> passwords since 2004/12/19</h1>
+        <ul id="links">
+            <li><a href="">about</a><span>•</span></li>
+            <li><a href="">share/bookmark</a><span>•</span></li>
+            <li><a href="https://chrome.google.com/extensions/detail/pjeobohajbopobondedhdnljhmoifncf">Chrome extension</a><span>•</span></li>
+            <li><a href="">bookmarklet</a></li>
+        </ul>
+    </div><!-- END HEADER -->
+
 <?
 
 import_request_variables("g", "generate_");
 if (!isset($generate_template))
-    $generate_template = 1;
+    $generate_template = "Cvccvc99";
 
 if (!isset($generate_number))
     $generate_number = 10;
 
-
 $templates = array('Cvcv9', 'Cvccvc99', 'Cvccvccvc999', 'Cv#9cUcvCl9v', 'UlCv#9#cUcvC#l9vllV##99v9Ul#cc', '9999', '999999');
 
-Function GeneratePasswords($template, $number)
-{
+function GeneratePasswords($template, $number) {
     $chars['l'] = 'abcdefghijklmnoprstuvwxyz';
     $chars['U'] = strtoupper($chars['l']);
     $chars['v'] = 'aeiouy';
@@ -145,35 +116,23 @@ Function GeneratePasswords($template, $number)
             $sign = $haystack{$location-1};
             $password .= $sign;
         }
-        //echo '(' . strlen($password) . ') ' . $password . "<br>\n";
         $returnarray[$x] = $password;
     }
 
     return $returnarray;
 }
 
-function microtime_float()
-{
+function microtime_float() {
    list($usec, $sec) = explode(" ", microtime());
    return ((float)$usec + (float)$sec);
 }
 ?>
-<form action="/" method="GET">
-    <input type="hidden" name="dopasswords" value="true">
-    <table border="0" cellpadding="2" cellspacing="2">
-        <tr>
-            <td valign="top" class="malinaslov">Template:</td>
-            <td><SELECT name="template" size=<?=count($templates)+1?>>
-        <? foreach ($templates as $key => $value)
-            {
-                echo "\t<OPTION value=\"{$key}\"";
-                if ($key == $generate_template)
-                    echo " SELECTED";
-                echo ">{$value}</OPTION>\n";
-            }?>
-            <OPTION value="custom" <? if ($generate_template == 'custom') echo 'SELECTED';?>>Custom template</OPTION>
-            </SELECT></td>
-            <td>
+    <div id="container">
+    	<form>
+    	<div id="generator">
+            <h2>choose password template</h2>
+            <a href="#" class="sprite about_templates" title="about templates"></a>
+            <div class="tooltip">
                 <table>
                     <tr>
                         <th>type</th>
@@ -221,29 +180,22 @@ function microtime_float()
                         <td><?=htmlentities('!@#$%^&*_-+=()[]{}')?></td>
                     </tr>
                 </table>
-            </td>
-        </tr>
-        <tr>
-            <td valign="top" class="malinaslov">Custom Template:</td>
-            <td><input type="text" name="custom_template" size="40" maxlength="100" class="unos" value="<?=$generate_custom_template?>"></td>
-        </tr>
-        <tr>
-            <td valign="top" class="malinaslov">Number of passwords:</td>
-            <td><input type="text" name="number" size="10" maxlength="4" class="unos" value="<?=$generate_number?>"></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td><input type="submit" name="submit" value="Generate!" class="gumb"></td>
-        </tr>
-    </table>
-</form>
+            </div>
+            <ul id="templates">
+            <? foreach ($templates as $template) { ?>
+   		<li><label><input name="template" type="radio" value="<?=$template?>" <? if ($template == $generate_template) { ?>checked="checked"<?}?> /><?=$template?></label></li>
+            <? } ?>
+            </ul>
+            <input type="submit" class="sprite button" value="" />
+        </div><!-- END GENERATOR -->
+        </form>
+
+        <div id="results">
+            <h3>your passwords</h3>
+            <em>click to copy to clipboard</em>
+            <ul id="passwords">
 <?
-if ($generate_dopasswords == 'true')
-{
-    if ($generate_template == 'custom')
-        $template = $generate_custom_template;
-    else
-        $template = $templates[$generate_template];
+    $template = $generate_template;
 
     $number = $generate_number;
     $counter += $number;
@@ -253,20 +205,23 @@ if ($generate_dopasswords == 'true')
     $time_end = microtime_float();
     $time = $time_end - $time_start;
 
-    echo "<table>\n";
-    foreach ($result as $key => $password)
-        echo "\t<tr><td>" . ($key+1) . '</td><td>' . $password . "</td></tr>\n";
-    echo "</table>\n";
+    foreach ($result as $password)
+        echo "\t<li class='copyme'>{$password}</li>\n";
 
     $fp = fopen($counter_file, "w");
     fwrite($fp, $counter);
     fclose($fp);
 
-
-    echo "<p style=\"text-align: center;\">Operation finished in " . (int)($time*1000000) . " microseconds<br /></p>";
-}
-
 ?>
+            </ul>
+        </div><!-- END RESULTS -->
+    </div><!-- END CONTAINER -->
+
+</div><!-- END WRAPPER -->
+
+<div id="footer">
+	<a class="designeus" title="this web site was built by Designeus Web Studio" href="http://www.designeus.hr"></a>
+</div>
 
 </body>
 </html>
